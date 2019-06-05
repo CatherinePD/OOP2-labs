@@ -1,0 +1,186 @@
+﻿<Window x:Class="Lab4_5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab4_5"
+        xmlns:control = "clr-namespace:Lab4_5"
+        mc:Ignorable="d"
+        Loaded="TextEditLoad"
+        Icon = "icon.png"
+        Title="CatherineTE" Height="600" Width="900">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="30">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Height="30" VerticalAlignment="Top"  >
+            <MenuItem Header="{DynamicResource _File}" Height="30" Width="60" >
+                <MenuItem x:Name="Create" Header="{DynamicResource _New}"  Command="ApplicationCommands.New">
+                    <MenuItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.New" Executed="New_Executed" />
+                    </MenuItem.CommandBindings>
+                </MenuItem>
+                <MenuItem x:Name="Open" Header="{DynamicResource _Open}"  Command="ApplicationCommands.Open">
+                    <MenuItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+                    </MenuItem.CommandBindings>
+                </MenuItem>
+                <MenuItem x:Name="Save" Header="{DynamicResource _Save}"  Command="ApplicationCommands.Save">
+                    <MenuItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
+                    </MenuItem.CommandBindings>
+                </MenuItem>
+                <MenuItem x:Name="Print" Header="{DynamicResource _Print}"  Command="ApplicationCommands.Print">
+                    <MenuItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Print" Executed="Print_Executed" />
+                    </MenuItem.CommandBindings>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="{DynamicResource _RecentFiles}" x:Name="recentFiles"/>
+                <Separator />
+                <MenuItem x:Name="Close" Header="{DynamicResource _Close}"  Command="ApplicationCommands.Close">
+                    <MenuItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Close" Executed="Close_Executed" />
+                    </MenuItem.CommandBindings>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Style="{DynamicResource LilOpacity}" Header="{DynamicResource _Edit}" Height="30" Width="60" >
+                <MenuItem x:Name="Undo" Header="{DynamicResource _Undo}"  Command="ApplicationCommands.Undo"   />
+                <MenuItem x:Name="Redo" Header="{DynamicResource _Redo}"  Command="ApplicationCommands.Redo"   />
+                <Separator/>
+                <MenuItem x:Name="Cut" Header="{DynamicResource _Cut}"  Command="ApplicationCommands.Cut"   />
+                <MenuItem x:Name="Copy" Header="{DynamicResource _Copy}"  Command="ApplicationCommands.Copy" />
+                <MenuItem x:Name="Paste" Header="{DynamicResource _Paste}"  Command="ApplicationCommands.Paste" />
+                <MenuItem x:Name="Delete" Header="{DynamicResource _Delete}" Command="ApplicationCommands.Delete">
+                    <MenuItem.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete_Executed" />
+                    </MenuItem.CommandBindings>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Style="{DynamicResource LilOpacity}" Header="{DynamicResource _Text}" Height="30" Width="60" >
+                <MenuItem Header="{DynamicResource _Style}">
+                    <MenuItem Header="{DynamicResource _Bold}"  Command="EditingCommands.ToggleBold"  />
+                    <MenuItem Header="{DynamicResource _Italic}" Command="EditingCommands.ToggleItalic"   />
+                    <MenuItem Header="{DynamicResource _Underline}" Command="EditingCommands.ToggleUnderline"/>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource _Font}" Name="fontsMenu" Click="MenuItem_Click"/>
+                <MenuItem Header="{DynamicResource _Font_size}" Name="fontSizeMenu" Click="MenuItem_Click"/>
+                <MenuItem Header="{DynamicResource _Font_color}" Name="fontColorMenu" Click="MenuItem_Click"/>
+                <MenuItem Header="{DynamicResource _Font_backgroud}" Name ="fontColor2Menu" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource _Lang}">
+                <MenuItem Header="{DynamicResource _Ru}" Click="SetRussian" />
+                <MenuItem Header="{DynamicResource _Eng}" Click="SetEnglish"/>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource _Theme}">
+                <MenuItem Name="themegold" Header="{DynamicResource _ThemeGold}" Click="MenuItem_Click"/>
+                <MenuItem Name="themepurple" Header="{DynamicResource _ThemePurple}" Click="MenuItem_Click"/>
+                <MenuItem Name="themepink" Header="{DynamicResource _ThemePink}" Click="MenuItem_Click"/>
+
+            </MenuItem>
+        </Menu>
+        <DockPanel Style="{DynamicResource DockPanelStyle}" Grid.Row="1" HorizontalAlignment="Right" Width="892">
+            <ToolBarTray Width="830" >
+                <ToolBar Height="50"  Width="825" ComboBox.SelectionChanged="ToolBar_SelectionChanged" Margin="8,5,0,0">
+                    <Button ToolTip="{DynamicResource _File}" Width="50"  Command="ApplicationCommands.New" VerticalAlignment="Bottom" Height="50">
+                        <Button.Background>
+                            <ImageBrush ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\file.png" Viewbox="-0.1,-0.2,1.2,1.3"/>
+                        </Button.Background>
+                        <Button.CommandBindings>
+                            <CommandBinding Command="ApplicationCommands.New" Executed="New_Executed" />
+                        </Button.CommandBindings>
+                    </Button>
+                    <Button ToolTip="{DynamicResource _Open}" Width="50"  Command="ApplicationCommands.Open" VerticalAlignment="Bottom" Height="50">
+                        <Button.Background>
+                            <ImageBrush  ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\folder.png" Viewbox="0,0,1,0.95" />
+                        </Button.Background>
+                        <Button.CommandBindings>
+                            <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+                        </Button.CommandBindings>
+                    </Button>
+                    <Button ToolTip="{DynamicResource _Save}" Width="50"  Command="ApplicationCommands.Save"  VerticalAlignment="Bottom" Height="50">
+                        <Button.Background>
+                            <ImageBrush  ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\save.png" Viewbox="-0.2,-0.2,1.3,1.3"/>
+                        </Button.Background>
+                        <Button.CommandBindings>
+                            <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
+                        </Button.CommandBindings>
+                    </Button>
+                    <Button ToolTip="{DynamicResource _Print}" Width="50"  Command="ApplicationCommands.Print" VerticalAlignment="Bottom" Height="50" >
+                        <Button.Background>
+                            <ImageBrush   ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\print.png" Viewbox="0,-0.15,1.1,1.2" />
+                        </Button.Background>
+                        <Button.CommandBindings>
+                            <CommandBinding Command="ApplicationCommands.Print" Executed="Print_Executed" />
+                        </Button.CommandBindings>
+                    </Button>
+                    <Separator/>
+                    <Separator/>
+                    <Button ToolTip="{DynamicResource _Undo}" Width="50"  Command="ApplicationCommands.Undo" VerticalAlignment="Bottom" Height="50">
+                        <Button.Background>
+                            <ImageBrush   ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\undo.png" Viewbox="0,-0.15,1.1,1.2" />
+                        </Button.Background>
+                    </Button>
+                    <Button ToolTip="{DynamicResource _Redo}" Width="50" Command="ApplicationCommands.Redo"  VerticalAlignment="Bottom" Height="50">
+                        <Button.Background>
+                            <ImageBrush   ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\redo.png" Viewbox="0,-0.15,1.1,1.2" />
+                        </Button.Background>
+                    </Button>
+                    <Separator/>
+                    <Separator/>
+                    <ToggleButton FontWeight="Bold" Width="50" Height="50" ToolTip="{DynamicResource _Bold}" Style="{DynamicResource ToggleStyle}" Command="EditingCommands.ToggleBold">
+                        <ToggleButton.Background>
+                            <ImageBrush  ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\bold.png" Viewbox="0,-0.15,1.1,1.3"   />
+                        </ToggleButton.Background>
+                    </ToggleButton>
+                    <ToggleButton FontStyle="Italic" ToolTip="{DynamicResource _Italic}" Style="{DynamicResource ToggleStyle}" Command="EditingCommands.ToggleItalic" Width="50" Height="50">
+                        <ToggleButton.Background>
+                            <ImageBrush   ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\italic.png" Viewbox="0,-0.15,1.1,1.3"/>
+                        </ToggleButton.Background>
+                    </ToggleButton>
+                    <ToggleButton ToolTip="{DynamicResource _Underline}" Style="{DynamicResource ToggleStyle}" Command="EditingCommands.ToggleUnderline" Width="50" Height="50">
+                        <ToggleButton.Background>
+                            <ImageBrush   ImageSource="D:\2nd course\4th sem\OOP\Labs\Lab4-5\Lab4-5\images\underline.png" Viewbox="0,-0.15,1.1,1.3"/>
+                        </ToggleButton.Background>
+                    </ToggleButton>
+                    <Separator/>
+                    <Separator/>
+                    <ComboBox x:Name="fonts" Height="40" MinWidth="130" ToolTip="{DynamicResource _Font}"/>
+                    <ComboBox Name="fontSize" Height="40" MinWidth="60" ToolTip="{DynamicResource _Font_size}"/>
+                    <ComboBox x:Name="fontColor" MinWidth="60" Height="40" ToolTip="{DynamicResource _Font_color}"/>
+                    <ComboBox x:Name="fontColor2" MinWidth="60" Height="40" ToolTip="{DynamicResource _Font_backgroud}"/>
+                </ToolBar>
+            </ToolBarTray>
+            <control:CustomControl1 x:Name = "customControl" Click = "customControl_Click"/>
+        </DockPanel>
+        <DockPanel Style="{DynamicResource DockPanelStyle}" Grid.Row="2">
+            <RichTextBox  x:Name="richtextbox" FontFamily="Times New Roman" TextChanged="Text_Changed" AllowDrop="True" Template="{StaticResource RTBTemplate}">
+                <RichTextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="CutContext" Header="{DynamicResource _Cut}"  Command="ApplicationCommands.Cut"   />
+                        <MenuItem x:Name="CopyContext" Header="{DynamicResource _Copy}"  Command="ApplicationCommands.Copy" />
+                        <MenuItem x:Name="PasteContext" Header="{DynamicResource _Paste}"  Command="ApplicationCommands.Paste" />
+                        <MenuItem x:Name="DeleteContext" Header="{DynamicResource _Delete}" Command="ApplicationCommands.Delete">
+                            <MenuItem.CommandBindings>
+                                <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete_Executed" />
+                            </MenuItem.CommandBindings>
+                        </MenuItem>
+                    </ContextMenu>
+                </RichTextBox.ContextMenu>
+            </RichTextBox>
+        </DockPanel>
+        <Grid  Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="label3" Content="{DynamicResource _Num_of_char}" Grid.Column="0" Height="30" Grid.Row="3"/>
+            <Label x:Name="label1" Content="0" Height="30" Grid.ColumnSpan="2" Margin="132,0,0,0"/>
+        </Grid>
+    </Grid>
+</Window>

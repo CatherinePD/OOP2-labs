@@ -1,0 +1,63 @@
+<ResourceDictionary
+    x:Class="Lab4_5.Generic"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Lab4_5">
+
+
+    <Style TargetType="{x:Type local:CustomControl1}" BasedOn = "{StaticResource {x:Type Button}}">
+        <Setter Property="ToolTip" Value="{DynamicResource _Close}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CustomControl1}">
+                    <Border
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            CornerRadius="30">
+                        <Border.Background>
+                            <ImageBrush ImageSource="images/close.gif"></ImageBrush>
+                        </Border.Background>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Control.Width" Value="40"/>
+        <Setter Property="Control.Height" Value="40"/>
+        <Style.Triggers>
+            <!--<EventTrigger RoutedEvent="MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:1" To="100" AutoReverse="True" />
+                            <DoubleAnimation Storyboard.TargetProperty="Height" Duration="0:0:1" To="100" AutoReverse="True" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:1" To="40" AutoReverse="True" />
+                            <DoubleAnimation Storyboard.TargetProperty="Height" Duration="0:0:1" To="40" AutoReverse="True" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>-->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Width" Value="50" />
+                <Setter Property="Height" Value="50" />
+            </Trigger>
+        </Style.Triggers>
+      
+        <!--<Setter Property="Background">
+            <Setter.Value>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <MediaElement x:Name="myGif" MediaEnded="myGif_MediaEnded" UnloadedBehavior="Manual" Source="images/close.gif" LoadedBehavior="Play" Stretch="None"/>
+                        </VisualBrush.Visual>
+                </VisualBrush>
+            </Setter.Value>
+        </Setter>-->
+    </Style>
+</ResourceDictionary>
